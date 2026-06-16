@@ -1,96 +1,92 @@
-import xml.etree.ElementTree as ET
-
 svg_content = """<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="72" height="72" version="1.1" xmlns="http://www.w3.org/2000/svg">
-  <!-- Hints -->
-  <rect id="hint-top-margin" x="30" y="0" width="12" height="30" fill="none"/>
-  <rect id="hint-bottom-margin" x="30" y="42" width="12" height="30" fill="none"/>
-  <rect id="hint-left-margin" x="0" y="30" width="30" height="12" fill="none"/>
-  <rect id="hint-right-margin" x="42" y="30" width="30" height="12" fill="none"/>
+<svg width="60" height="52" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <!-- Wider left/right margins so pill extends past icons -->
+  <rect id="hint-top-margin" x="26" y="0" width="8" height="6" fill="none"/>
+  <rect id="hint-bottom-margin" x="26" y="46" width="8" height="6" fill="none"/>
+  <rect id="hint-left-margin" x="0" y="22" width="18" height="8" fill="none"/>
+  <rect id="hint-right-margin" x="42" y="22" width="18" height="8" fill="none"/>
   
-  <rect id="hint-top-inset" x="30" y="0" width="12" height="6" fill="none"/>
-  <rect id="hint-bottom-inset" x="30" y="66" width="12" height="6" fill="none"/>
-  <rect id="hint-left-inset" x="0" y="30" width="6" height="12" fill="none"/>
-  <rect id="hint-right-inset" x="66" y="30" width="6" height="12" fill="none"/>
+  <rect id="hint-top-inset" x="26" y="0" width="8" height="4" fill="none"/>
+  <rect id="hint-bottom-inset" x="26" y="48" width="8" height="4" fill="none"/>
+  <rect id="hint-left-inset" x="0" y="22" width="4" height="8" fill="none"/>
+  <rect id="hint-right-inset" x="56" y="22" width="4" height="8" fill="none"/>
 
-  <!-- Visual Elements -->
+  <!-- 26px wide corners for prominent pill shape -->
   <g id="topleft">
-    <rect x="0" y="0" width="30" height="30" fill="none"/>
-    <path fill="#9C27B0" fill-opacity="0.35" d="M 30,6 A 24,24 0 0,0 6,30 L 30,30 Z"/>
+    <rect x="0" y="0" width="26" height="22" fill="none"/>
+    <path fill="#9C27B0" fill-opacity="0.15" d="M 26,0 A 26,22 0 0,0 0,22 L 26,22 Z"/>
   </g>
   <g id="top">
-    <rect x="30" y="0" width="12" height="30" fill="none"/>
-    <rect fill="#9C27B0" fill-opacity="0.35" x="30" y="6" width="12" height="24"/>
+    <rect x="26" y="0" width="8" height="22" fill="none"/>
+    <rect fill="#9C27B0" fill-opacity="0.15" x="26" y="0" width="8" height="22"/>
   </g>
   <g id="topright">
-    <rect x="42" y="0" width="30" height="30" fill="none"/>
-    <path fill="#9C27B0" fill-opacity="0.35" d="M 42,6 A 24,24 0 0,1 66,30 L 42,30 Z"/>
+    <rect x="34" y="0" width="26" height="22" fill="none"/>
+    <path fill="#9C27B0" fill-opacity="0.15" d="M 34,0 A 26,22 0 0,1 60,22 L 34,22 Z"/>
   </g>
 
   <g id="left">
-    <rect x="0" y="30" width="30" height="12" fill="none"/>
-    <rect fill="#9C27B0" fill-opacity="0.35" x="6" y="30" width="24" height="12"/>
+    <rect x="0" y="22" width="26" height="8" fill="none"/>
+    <rect fill="#9C27B0" fill-opacity="0.15" x="0" y="22" width="26" height="8"/>
   </g>
   <g id="center">
-    <rect x="30" y="30" width="12" height="12" fill="none"/>
-    <rect fill="#9C27B0" fill-opacity="0.35" x="30" y="30" width="12" height="12"/>
+    <rect x="26" y="22" width="8" height="8" fill="none"/>
+    <rect fill="#9C27B0" fill-opacity="0.15" x="26" y="22" width="8" height="8"/>
   </g>
   <g id="right">
-    <rect x="42" y="30" width="30" height="12" fill="none"/>
-    <rect fill="#9C27B0" fill-opacity="0.35" x="42" y="30" width="24" height="12"/>
+    <rect x="34" y="22" width="26" height="8" fill="none"/>
+    <rect fill="#9C27B0" fill-opacity="0.15" x="34" y="22" width="26" height="8"/>
   </g>
 
   <g id="bottomleft">
-    <rect x="0" y="42" width="30" height="30" fill="none"/>
-    <path fill="#9C27B0" fill-opacity="0.35" d="M 6,42 A 24,24 0 0,0 30,66 L 30,42 Z"/>
+    <rect x="0" y="30" width="26" height="22" fill="none"/>
+    <path fill="#9C27B0" fill-opacity="0.15" d="M 0,30 A 26,22 0 0,0 26,52 L 26,30 Z"/>
   </g>
   <g id="bottom">
-    <rect x="30" y="42" width="12" height="30" fill="none"/>
-    <rect fill="#9C27B0" fill-opacity="0.35" x="30" y="42" width="12" height="24"/>
+    <rect x="26" y="30" width="8" height="22" fill="none"/>
+    <rect fill="#9C27B0" fill-opacity="0.15" x="26" y="30" width="8" height="22"/>
   </g>
   <g id="bottomright">
-    <rect x="42" y="42" width="30" height="30" fill="none"/>
-    <path fill="#9C27B0" fill-opacity="0.35" d="M 66,42 A 24,24 0 0,1 42,66 L 42,42 Z"/>
+    <rect x="34" y="30" width="26" height="22" fill="none"/>
+    <path fill="#9C27B0" fill-opacity="0.15" d="M 60,30 A 26,22 0 0,1 34,52 L 34,30 Z"/>
   </g>
 
-  <!-- Mask Elements for Compositor Blur/Contrast -->
+  <!-- Masks -->
   <g id="mask-topleft">
-    <rect x="0" y="0" width="30" height="30" fill="none"/>
-    <path fill="#000000" d="M 30,6 A 24,24 0 0,0 6,30 L 30,30 Z"/>
+    <rect x="0" y="0" width="26" height="22" fill="none"/>
+    <path fill="#000000" d="M 26,0 A 26,22 0 0,0 0,22 L 26,22 Z"/>
   </g>
   <g id="mask-top">
-    <rect x="30" y="0" width="12" height="30" fill="none"/>
-    <rect fill="#000000" x="30" y="6" width="12" height="24"/>
+    <rect x="26" y="0" width="8" height="22" fill="none"/>
+    <rect fill="#000000" x="26" y="0" width="8" height="22"/>
   </g>
   <g id="mask-topright">
-    <rect x="42" y="0" width="30" height="30" fill="none"/>
-    <path fill="#000000" d="M 42,6 A 24,24 0 0,1 66,30 L 42,30 Z"/>
+    <rect x="34" y="0" width="26" height="22" fill="none"/>
+    <path fill="#000000" d="M 34,0 A 26,22 0 0,1 60,22 L 34,22 Z"/>
   </g>
-
   <g id="mask-left">
-    <rect x="0" y="30" width="30" height="12" fill="none"/>
-    <rect fill="#000000" x="6" y="30" width="24" height="12"/>
+    <rect x="0" y="22" width="26" height="8" fill="none"/>
+    <rect fill="#000000" x="0" y="22" width="26" height="8"/>
   </g>
   <g id="mask-center">
-    <rect x="30" y="30" width="12" height="12" fill="none"/>
-    <rect fill="#000000" x="30" y="30" width="12" height="12"/>
+    <rect x="26" y="22" width="8" height="8" fill="none"/>
+    <rect fill="#000000" x="26" y="22" width="8" height="8"/>
   </g>
   <g id="mask-right">
-    <rect x="42" y="30" width="30" height="12" fill="none"/>
-    <rect fill="#000000" x="42" y="30" width="24" height="12"/>
+    <rect x="34" y="22" width="26" height="8" fill="none"/>
+    <rect fill="#000000" x="34" y="22" width="26" height="8"/>
   </g>
-
   <g id="mask-bottomleft">
-    <rect x="0" y="42" width="30" height="30" fill="none"/>
-    <path fill="#000000" d="M 6,42 A 24,24 0 0,0 30,66 L 30,42 Z"/>
+    <rect x="0" y="30" width="26" height="22" fill="none"/>
+    <path fill="#000000" d="M 0,30 A 26,22 0 0,0 26,52 L 26,30 Z"/>
   </g>
   <g id="mask-bottom">
-    <rect x="30" y="42" width="12" height="30" fill="none"/>
-    <rect fill="#000000" x="30" y="42" width="12" height="24"/>
+    <rect x="26" y="30" width="8" height="22" fill="none"/>
+    <rect fill="#000000" x="26" y="30" width="8" height="22"/>
   </g>
   <g id="mask-bottomright">
-    <rect x="42" y="42" width="30" height="30" fill="none"/>
-    <path fill="#000000" d="M 66,42 A 24,24 0 0,1 42,66 L 42,42 Z"/>
+    <rect x="34" y="30" width="26" height="22" fill="none"/>
+    <path fill="#000000" d="M 60,30 A 26,22 0 0,1 34,52 L 34,30 Z"/>
   </g>
 </svg>
 """
