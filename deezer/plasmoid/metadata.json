@@ -1,0 +1,20 @@
+{
+    "KPlugin": {
+        "Name": "Deezer Controller",
+        "Description": "Controls your Deezer music",
+        "Icon": "multimedia-audio-player",
+        "Id": "org.kde.plasma.deezer",
+        "Version": "1.0",
+        "License": "GPL-2.0+",
+        "Authors": [
+            {
+                "Name": "Antigravity",
+                "Email": "antigravity@example.com"
+            }
+        ]
+    },
+    "X-Plasma-API": "declarativeappletscript",
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-MainScript": "ui/main.qml",
+    "KPackageStructure": "Plasma/Applet"
+}
