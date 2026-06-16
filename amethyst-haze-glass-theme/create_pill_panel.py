@@ -1,50 +1,39 @@
 import xml.etree.ElementTree as ET
 
 svg_content = """<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="100" height="100" version="1.1" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <style>
-      .bg { fill: #9C27B0; fill-opacity: 0.35; }
-    </style>
-  </defs>
-
-  <!-- Hints -->
-  <rect id="hint-top-margin" width="10" height="40" x="45" y="0" opacity="0"/>
-  <rect id="hint-bottom-margin" width="10" height="40" x="45" y="60" opacity="0"/>
-  <rect id="hint-left-margin" width="40" height="10" x="0" y="45" opacity="0"/>
-  <rect id="hint-right-margin" width="40" height="10" x="60" y="45" opacity="0"/>
+<svg width="60" height="60" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <rect id="hint-top-margin" width="10" height="24" x="25" y="0" opacity="0"/>
+  <rect id="hint-bottom-margin" width="10" height="24" x="25" y="36" opacity="0"/>
+  <rect id="hint-left-margin" width="24" height="10" x="0" y="25" opacity="0"/>
+  <rect id="hint-right-margin" width="24" height="10" x="36" y="25" opacity="0"/>
   
-  <!-- Corners -->
   <g id="topleft">
-    <path class="bg" d="M 40,0 A 40,40 0 0,0 0,40 L 40,40 Z"/>
+    <path fill="#9C27B0" fill-opacity="0.35" d="M 24,0 A 24,24 0 0,0 0,24 L 24,24 Z"/>
   </g>
   <g id="topright">
-    <path class="bg" d="M 60,0 A 40,40 0 0,1 100,40 L 60,40 Z"/>
+    <path fill="#9C27B0" fill-opacity="0.35" d="M 36,0 A 24,24 0 0,1 60,24 L 36,24 Z"/>
   </g>
   <g id="bottomleft">
-    <path class="bg" d="M 0,60 A 40,40 0 0,0 40,100 L 40,60 Z"/>
+    <path fill="#9C27B0" fill-opacity="0.35" d="M 0,36 A 24,24 0 0,0 24,60 L 24,36 Z"/>
   </g>
   <g id="bottomright">
-    <path class="bg" d="M 100,60 A 40,40 0 0,1 60,100 L 60,60 Z"/>
+    <path fill="#9C27B0" fill-opacity="0.35" d="M 60,36 A 24,24 0 0,1 36,60 L 36,36 Z"/>
   </g>
 
-  <!-- Edges -->
   <g id="top">
-    <rect class="bg" x="40" y="0" width="20" height="40"/>
+    <rect fill="#9C27B0" fill-opacity="0.35" x="24" y="0" width="12" height="24"/>
   </g>
   <g id="bottom">
-    <rect class="bg" x="40" y="60" width="20" height="40"/>
+    <rect fill="#9C27B0" fill-opacity="0.35" x="24" y="36" width="12" height="24"/>
   </g>
   <g id="left">
-    <rect class="bg" x="0" y="40" width="40" height="20"/>
+    <rect fill="#9C27B0" fill-opacity="0.35" x="0" y="24" width="24" height="12"/>
   </g>
   <g id="right">
-    <rect class="bg" x="60" y="40" width="40" height="20"/>
+    <rect fill="#9C27B0" fill-opacity="0.35" x="36" y="24" width="24" height="12"/>
   </g>
-
-  <!-- Center -->
   <g id="center">
-    <rect class="bg" x="40" y="40" width="20" height="20"/>
+    <rect fill="#9C27B0" fill-opacity="0.35" x="24" y="24" width="12" height="12"/>
   </g>
 </svg>
 """
