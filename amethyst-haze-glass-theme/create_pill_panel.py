@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+import xml.etree.ElementTree as ET
+
+svg_content = """<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg width="100" height="100" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <style>
@@ -45,3 +47,7 @@
     <rect class="bg" x="40" y="40" width="20" height="20"/>
   </g>
 </svg>
+"""
+
+with open('/home/ilias/widget/amethyst-haze-glass-theme/panel-background.svg', 'w') as f:
+    f.write(svg_content)
