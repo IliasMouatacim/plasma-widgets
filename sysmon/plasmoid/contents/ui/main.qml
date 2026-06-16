@@ -48,7 +48,7 @@ PlasmoidItem {
     
     fullRepresentation: Item {
         implicitWidth: Kirigami.Units.gridUnit * 18
-        implicitHeight: Kirigami.Units.gridUnit * 8.5
+        implicitHeight: Kirigami.Units.gridUnit * 10.5
         Layout.preferredWidth: implicitWidth
         Layout.preferredHeight: implicitHeight
         
@@ -233,8 +233,6 @@ PlasmoidItem {
                     Layout.fillWidth: true
                     
                     PlasmaComponents.ToolButton {
-                        Layout.leftMargin: Kirigami.Units.smallSpacing
-                        Layout.bottomMargin: Kirigami.Units.smallSpacing
                         icon.name: "settings-configure"
                         text: "⚙"
                         display: PlasmaComponents.AbstractButton.IconOnly

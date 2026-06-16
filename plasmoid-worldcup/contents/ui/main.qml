@@ -264,8 +264,6 @@ PlasmoidItem {
                 Layout.fillWidth: true
                 
                 PlasmaComponents.ToolButton {
-                    Layout.leftMargin: Kirigami.Units.smallSpacing
-                    Layout.bottomMargin: Kirigami.Units.smallSpacing
                     icon.name: "settings-configure"
                     text: "⚙"
                     display: PlasmaComponents.AbstractButton.IconOnly
