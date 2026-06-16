@@ -263,11 +263,19 @@ PlasmoidItem {
             RowLayout {
                 Layout.fillWidth: true
                 
-                PlasmaComponents.ToolButton {
-                    icon.name: "settings-configure"
+                PlasmaComponents.Label {
                     text: "⚙"
-                    display: PlasmaComponents.AbstractButton.IconOnly
-                    onClicked: settingsPopup.open()
+                    font.pixelSize: Kirigami.Theme.defaultFont.pixelSize * 1.5
+                    color: Plasmoid.configuration.textColor || "#FFFFFF"
+                    Layout.alignment: Qt.AlignVCenter
+                    
+                    MouseArea {
+                        anchors.fill: parent
+                        // increase clickable area slightly
+                        anchors.margins: -Kirigami.Units.smallSpacing
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: settingsPopup.open()
+                    }
                 }
                 
                 Item { Layout.fillWidth: true } // Spacer
