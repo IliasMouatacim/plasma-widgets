@@ -2,9 +2,9 @@
 cd "$(dirname "$0")"
 
 # Check if it's already running to prevent multiple instances
-if pgrep -f "deezer_backend.py" > /dev/null
+if pgrep -f "sysmon_backend.py" > /dev/null
 then
     echo "Backend already running."
 else
-    nohup python backend/deezer_backend.py > /dev/null 2>&1 &
+    nohup python backend/sysmon_backend.py > /dev/null 2>&1 &
 fi

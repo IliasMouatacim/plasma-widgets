@@ -14,6 +14,8 @@ PlasmoidItem {
     property string playbackStatus: "Stopped"
     property string artUrl: ""
     
+    Plasmoid.backgroundHints: "NoBackground" // Remove the ugly black square frame
+    
     function updateStatus() {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {

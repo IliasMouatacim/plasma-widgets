@@ -9,6 +9,8 @@ PlasmoidItem {
     
     preferredRepresentation: fullRepresentation
     
+    Plasmoid.backgroundHints: "NoBackground"
+    
     property int dateOffset: 0
     property var matches: []
     property string lastUpdated: ""
@@ -92,10 +94,22 @@ PlasmoidItem {
         Layout.preferredWidth: implicitWidth
         Layout.preferredHeight: implicitHeight
         
-        ColumnLayout {
+        Rectangle {
             anchors.fill: parent
-            anchors.margins: Kirigami.Units.largeSpacing * 1.5
-            spacing: Kirigami.Units.largeSpacing
+            radius: Kirigami.Units.largeSpacing * 1.5
+            
+            color: {
+                var c = String(Plasmoid.configuration.baseColor || "#663399");
+                var isTrans = Plasmoid.configuration.isTransparent;
+                return Qt.alpha(c, isTrans ? 0.2 : 0.9);
+            }
+            border.color: Qt.rgba(1, 1, 1, 0.25)
+            border.width: 1
+            
+            ColumnLayout {
+                anchors.fill: parent
+                anchors.margins: Kirigami.Units.largeSpacing * 1.5
+                spacing: Kirigami.Units.largeSpacing
             
             // Header
             RowLayout {
@@ -104,7 +118,7 @@ PlasmoidItem {
                     font.weight: Font.Bold
                     font.pixelSize: Kirigami.Theme.defaultFont.pixelSize * 1.3
                     horizontalAlignment: Text.AlignHCenter
-                    Layout.fillWidth: true
+                    color: Plasmoid.configuration.textColor || "#FFFFFF"
                 }
             }
             
@@ -127,7 +141,7 @@ PlasmoidItem {
                     horizontalAlignment: Text.AlignHCenter
                     Layout.fillWidth: true
                     font.weight: Font.Bold
-                    color: Kirigami.Theme.neutralTextColor
+                    color: Plasmoid.configuration.textColor || "#FFFFFF"
                 }
                 
                 PlasmaComponents.Button {
@@ -166,18 +180,18 @@ PlasmoidItem {
                     radius: Kirigami.Units.smallSpacing
                     
                     property color c1: {
-                        if (!modelData.score || !modelData.score.ft) return Kirigami.Theme.textColor;
+                        if (!modelData.score || !modelData.score.ft) return "#FFFFFF";
                         var s1 = modelData.score.ft[0];
                         var s2 = modelData.score.ft[1];
-                        if (s1 === s2) return Kirigami.Theme.highlightColor;
-                        return s1 > s2 ? Kirigami.Theme.positiveTextColor : Kirigami.Theme.negativeTextColor;
+                        if (s1 === s2) return "#f1c40f"; // Yellow
+                        return s1 > s2 ? "#2ecc71" : "#e74c3c"; // Green or Red
                     }
                     property color c2: {
-                        if (!modelData.score || !modelData.score.ft) return Kirigami.Theme.textColor;
+                        if (!modelData.score || !modelData.score.ft) return "#FFFFFF";
                         var s1 = modelData.score.ft[0];
                         var s2 = modelData.score.ft[1];
-                        if (s1 === s2) return Kirigami.Theme.highlightColor;
-                        return s2 > s1 ? Kirigami.Theme.positiveTextColor : Kirigami.Theme.negativeTextColor;
+                        if (s1 === s2) return "#f1c40f"; // Yellow
+                        return s2 > s1 ? "#2ecc71" : "#e74c3c"; // Green or Red
                     }
                     
                     ColumnLayout {
@@ -207,7 +221,7 @@ PlasmoidItem {
                                     if (modelData.score && modelData.score.ft) {
                                         return "<font color='" + matchItem.c1 + "'>" + modelData.score.ft[0] + "</font> - <font color='" + matchItem.c2 + "'>" + modelData.score.ft[1] + "</font>"
                                     }
-                                    return "<font color='" + Kirigami.Theme.highlightColor + "'>VS</font>"
+                                    return "<font color='#f1c40f'>VS</font>"
                                 }
                                 font.weight: Font.Bold
                                 font.pixelSize: Kirigami.Theme.defaultFont.pixelSize * 1.2
@@ -230,7 +244,7 @@ PlasmoidItem {
                         PlasmaComponents.Label {
                             text: root.getMatchStatus(modelData.date, modelData.time)
                             font.pixelSize: Kirigami.Theme.smallFont.pixelSize
-                            color: text === "FT" ? Kirigami.Theme.disabledTextColor : Kirigami.Theme.neutralTextColor
+                            color: text === "FT" ? "#BDC3C7" : "#F39C12" // Light Grey or Orange
                             Layout.alignment: Qt.AlignHCenter
                             visible: text !== ""
                         }
@@ -241,17 +255,105 @@ PlasmoidItem {
                     anchors.centerIn: parent
                     text: "No matches scheduled."
                     visible: matchesList.count === 0
-                    color: Kirigami.Theme.disabledTextColor
+                    color: Plasmoid.configuration.textColor || "#E0E0E0"
                 }
             }
             
             // Footer
-            PlasmaComponents.Label {
-                text: "Updated: " + root.lastUpdated
-                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
-                color: Kirigami.Theme.disabledTextColor
-                horizontalAlignment: Text.AlignHCenter
+            RowLayout {
                 Layout.fillWidth: true
+                
+                PlasmaComponents.ToolButton {
+                    icon.name: "settings-configure"
+                    text: "⚙"
+                    display: PlasmaComponents.AbstractButton.IconOnly
+                    onClicked: settingsPopup.open()
+                }
+                
+                Item { Layout.fillWidth: true } // Spacer
+                
+                PlasmaComponents.Label {
+                    text: "Updated: " + root.lastUpdated
+                    font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                    color: Plasmoid.configuration.textColor || "#E0E0E0"
+                }
+                
+                Item { Layout.fillWidth: true } // Spacer
+            }
+            }
+        }
+        
+        PlasmaComponents.Popup {
+            id: settingsPopup
+            parent: root
+            x: Kirigami.Units.largeSpacing
+            y: root.height - height - Kirigami.Units.largeSpacing
+            
+            contentItem: Rectangle {
+                color: Kirigami.Theme.backgroundColor
+                border.color: Kirigami.Theme.textColor
+                border.width: 1
+                radius: Kirigami.Units.smallSpacing
+                implicitWidth: Kirigami.Units.gridUnit * 12
+                implicitHeight: settingsLayout.implicitHeight + Kirigami.Units.largeSpacing * 2
+                
+                ColumnLayout {
+                    id: settingsLayout
+                    anchors.fill: parent
+                    anchors.margins: Kirigami.Units.largeSpacing
+                    spacing: Kirigami.Units.smallSpacing
+                    
+                    PlasmaComponents.Label {
+                        text: "Widget Settings"
+                        font.weight: Font.Bold
+                    }
+                    
+                    PlasmaComponents.CheckBox {
+                        text: "Transparent"
+                        checked: Plasmoid.configuration.isTransparent
+                        onCheckedChanged: Plasmoid.configuration.isTransparent = checked
+                    }
+                    
+                    PlasmaComponents.Label { text: "Base Color:" }
+                    RowLayout {
+                        spacing: Kirigami.Units.smallSpacing
+                        Repeater {
+                            model: ["#9C27B0", "#2980B9", "#27AE60", "#2C3E50", "#C0392B", "#000000", "#FFFFFF"]
+                            Rectangle {
+                                width: Kirigami.Units.gridUnit * 1.5
+                                height: Kirigami.Units.gridUnit * 1.5
+                                radius: width / 2
+                                color: modelData
+                                border.color: String(Plasmoid.configuration.baseColor).toUpperCase() === modelData.toUpperCase() ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
+                                border.width: String(Plasmoid.configuration.baseColor).toUpperCase() === modelData.toUpperCase() ? 3 : 1
+                                MouseArea {
+                                    anchors.fill: parent
+                                    onClicked: Plasmoid.configuration.baseColor = modelData
+                                }
+                            }
+                        }
+                    }
+                    
+                    PlasmaComponents.Label { text: "Text Color:" }
+                    RowLayout {
+                        spacing: Kirigami.Units.smallSpacing
+                        Repeater {
+                            model: ["#FFFFFF", "#E0E0E0", "#2C3E50", "#000000", "#F1C40F", "#3498DB"]
+                            Rectangle {
+                                width: Kirigami.Units.gridUnit * 1.5
+                                height: Kirigami.Units.gridUnit * 1.5
+                                radius: width / 2
+                                color: modelData
+                                border.color: String(Plasmoid.configuration.textColor).toUpperCase() === modelData.toUpperCase() ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
+                                border.width: String(Plasmoid.configuration.textColor).toUpperCase() === modelData.toUpperCase() ? 3 : 1
+                                MouseArea {
+                                    anchors.fill: parent
+                                    onClicked: Plasmoid.configuration.textColor = modelData
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
